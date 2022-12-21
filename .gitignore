@@ -9,6 +9,15 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+Hand Tracking Demo/[Ll]ibrary/
+Hand Tracking Demo/[Tt]emp/
+Hand Tracking Demo/[Oo]bj/
+Hand Tracking Demo/[Bb]uild/
+Hand Tracking Demo/[Bb]uilds/
+Hand Tracking Demo/[Ll]ogs/
+Hand Tracking Demo/[Mm]emoryCaptures/
+Hand Tracking Demo/ProjectSettings/ProjectVersion.txt
+Hand Tracking Demo/UserSettings/EditorUserSettings.asset
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
