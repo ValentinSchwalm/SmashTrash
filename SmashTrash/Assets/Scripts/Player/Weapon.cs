@@ -20,12 +20,17 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Projectile projectile;
 
     [Header("Suck Stats")]   
-    [SerializeField] private int suckForce;
+    [SerializeField] private float suckTime;
     [SerializeField] private float suckRadius;
     [SerializeField] private Vector3 suckSize;
     [SerializeField] private Transform suckTransform;
     [SerializeField] private LayerMask suckMask;
-    private GameObject[] suckedTrash;
+    private List<Trash> suckedTrash = new List<Trash>();
+
+    [Header("Bezier Curve")]
+    [SerializeField] private Transform[] bezierTransforms;
+    [SerializeField] private float offsetPoint1;
+    [SerializeField] private float offsetPoint2;
 
     #endregion
 
@@ -33,14 +38,31 @@ public class Weapon : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Draw Bezier Curve
+        if (this.bezierTransforms.Length == 4)
+        {
+            Vector3 gizmoPos;
+
+            for (float t = 0; t <= 1; t += 0.02f)
+            {
+                gizmoPos = Mathf.Pow(1 - t, 3) * this.bezierTransforms[0].position +
+                    3 * Mathf.Pow(1 - t, 2) * t * this.bezierTransforms[1].position +
+                    3 * (1 - t) * Mathf.Pow(t, 2) * this.bezierTransforms[2].position +
+                    Mathf.Pow(t, 3) * this.bezierTransforms[3].position;
+
+                Gizmos.DrawSphere(gizmoPos, 0.05f);
+            }
+        }
+
+        // Draw Suck Position
         Vector3 suckpos = this.destinationPoint.position + (this.destinationPoint.position - this.originPoint.position).normalized * this.suckSize.z / 2;
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(suckpos, 0.1f);
         Gizmos.DrawWireSphere(this.destinationPoint.position, this.suckRadius);
 
+        // Draw Suck Box
         Matrix4x4 rotationMatrix = Matrix4x4.TRS(this.suckTransform.position, this.suckTransform.rotation, this.suckTransform.lossyScale);
         Gizmos.matrix = rotationMatrix;
-
         Gizmos.DrawWireCube(Vector3.zero, this.suckSize);
     }
 
@@ -80,6 +102,11 @@ public class Weapon : MonoBehaviour
         this.ammunition--;
     }
 
+    public void OnSuckStop()
+    {
+        this.suckedTrash.Clear();
+    }
+
     public void Suck()
     {
         if (this.ammunition >= this.maxAmmunition)
@@ -87,6 +114,12 @@ public class Weapon : MonoBehaviour
             return;
         }
 
+        this.DetectTrash();
+        this.SuckTrash();
+    }
+
+    private void DetectTrash()
+    {
         Vector3 suckDirection = (this.destinationPoint.position - this.originPoint.position).normalized;
         Vector3 suckpos = this.destinationPoint.position + suckDirection * this.suckSize.z / 2;
         this.suckTransform.position = suckpos;
@@ -96,19 +129,61 @@ public class Weapon : MonoBehaviour
 
         foreach (Collider item in objectsToSuck)
         {
-            Rigidbody rb = item.GetComponent<Rigidbody>();
+            Trash trash = item.GetComponent<Trash>();
 
-            if (rb != null)
+            if (trash != null)
             {
-                rb.AddForce((this.destinationPoint.position - rb.position).normalized * this.suckForce * Time.deltaTime, ForceMode.VelocityChange);
+                if (!this.suckedTrash.Contains(trash))
+                {
+                    this.suckedTrash.Add(trash);
+
+                    this.bezierTransforms[0].position = trash.transform.position;
+                    this.bezierTransforms[3].position = this.destinationPoint.position;
+
+                    Vector3 direction = this.bezierTransforms[3].position - this.bezierTransforms[0].position;
+                    this.bezierTransforms[0].rotation = Quaternion.LookRotation(direction, Vector3.forward);
+
+                    Vector3 offset = (this.bezierTransforms[0].right * Random.Range(-1f, 1f) + this.bezierTransforms[0].up * Random.Range(-1f, 1f)).normalized;
+
+                    this.bezierTransforms[1].position = (this.bezierTransforms[0].position + direction * 0.1f) + offset * this.offsetPoint1;
+                    this.bezierTransforms[2].position = (this.bezierTransforms[0].position + direction * 0.5f) + offset * this.offsetPoint2;
+
+                    trash.SetTrashCurve(this.bezierTransforms[0].position, this.bezierTransforms[1].position, this.bezierTransforms[2].position);
+                    trash.Timer = 0;
+                }
+            }
+        }
+    }
+
+    private void SuckTrash()
+    {
+        List<Trash> suckedInTrash = new List<Trash>();
+
+        foreach (Trash trash in this.suckedTrash)
+        {
+                Vector3 newPosition = Mathf.Pow(1 - trash.Timer, 3) * trash.Origin +
+            3 * Mathf.Pow(1 - trash.Timer, 2) * trash.Timer * trash.Bezier1 +
+            3 * (1 - trash.Timer) * Mathf.Pow(trash.Timer, 2) * trash.Bezier2 +
+            Mathf.Pow(trash.Timer, 3) * this.destinationPoint.position;
+
+            Debug.DrawRay(newPosition, Vector3.up, Color.red);
+
+
+            trash.transform.position = newPosition;
+            trash.Timer += Time.deltaTime * this.suckTime;
+
+            if (trash.Timer >= 1)
+            {
+                suckedInTrash.Add(trash);
             }
         }
 
-        Collider[] suckedObjects = Physics.OverlapSphere(this.destinationPoint.position, this.suckRadius, this.suckMask);
-        foreach (Collider item in suckedObjects)
+        for (int i = 0; i < suckedInTrash.Count; i++)
         {
+            Destroy(suckedInTrash[0].gameObject);
+            this.suckedTrash.Remove(suckedInTrash[0]);
+            suckedInTrash.Remove(suckedInTrash[0]);
             this.ammunition++;
-            Destroy(item.gameObject);
         }
     }
 

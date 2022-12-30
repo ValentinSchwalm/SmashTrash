@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
         {
             this.SecondaryFire();
         }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            this.currentWeapon.OnSuckStop();
+        }
     }
 
     public void PrimaryFire()
