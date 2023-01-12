@@ -7,6 +7,7 @@ public class ChasingEnemy : Enemy
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rangeToAttack;
     [SerializeField] private Transform targetToChase;
+    private Rigidbody rigidbody;
 
     enum EnemyState
     {
@@ -23,22 +24,34 @@ public class ChasingEnemy : Enemy
 
     private void ChaseState()
     {
-
+        if(rangeToAttack > Vector3.Distance(transform.position, targetToChase.position))
+        {
+            State = EnemyState.Attack;
+        }
+        Vector3 moveDirection = Vector3.MoveTowards(transform.position, targetToChase.position, 1).normalized;
+        rigidbody.MovePosition(targetToChase.position);
+        rigidbody.AddForce(moveDirection);
+        rigidbody.velocity = moveDirection * movementSpeed * Time.deltaTime;
+        print("Chase");
     }
 
     protected virtual void AttackState()
     {
-
+        if (rangeToAttack < Vector3.Distance(transform.position, targetToChase.position))
+        {
+            State = EnemyState.Chase;
+        }
+        print("Attack");
     }
 
     public void Attack()
     {
-       
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -47,13 +60,17 @@ public class ChasingEnemy : Enemy
         switch (State)
         {
             case EnemyState.Chase:
-                ChaseAI();
+                ChaseState();
                 break;
             case EnemyState.Attack:
-                Attack();
+                AttackState();
                 break;
             default:
                 break;
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, rangeToAttack);
     }
 }
