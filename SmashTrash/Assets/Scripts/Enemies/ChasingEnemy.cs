@@ -28,9 +28,9 @@ public class ChasingEnemy : Enemy
         {
             State = EnemyState.Attack;
         }
-        Vector3 moveDirection = Vector3.MoveTowards(transform.position, targetToChase.position, 1).normalized;
-        rigidbody.MovePosition(targetToChase.position);
-        rigidbody.AddForce(moveDirection);
+        Vector3 moveDirection = (this.targetToChase.position - this.transform.position).normalized;
+        //rigidbody.MovePosition(targetToChase.position);
+        //rigidbody.AddForce(moveDirection * movementSpeed * Time.deltaTime);
         rigidbody.velocity = moveDirection * movementSpeed * Time.deltaTime;
         print("Chase");
     }
