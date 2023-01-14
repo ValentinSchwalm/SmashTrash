@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class HandGesture : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    public ManoGestureContinuous continuousGesture;
-    private GestureInfo gesture; // the current hand gesture being made
+    public TextMeshProUGUI counter;
+    public int count; 
 
     // Start is called before the first frame update
     void Start()
@@ -16,27 +17,34 @@ public class HandGesture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info;
-
-        // RecognizeInteraction(gesture);
+        
+        RecognizeInteraction();
         // RecignizeSuck(gesture);
 
     }
-
-    
   
-    void RecognizeInteraction(GestureInfo gesture)
+    private void RecognizeInteraction()
     {
-        // Checks if the current visable hand performs a gesture from pinch family
-        // if so, then the code will be executed in this case the phone will vibrate.
+        // public ManoGestureContinuous continuousGesture;
+        GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
+        ManoGestureTrigger trigger = gesture.mano_gesture_trigger;
 
-        if (gesture.mano_class == ManoClass.PINCH_GESTURE)
+        // Checks if the current visable hand performs a gesture from pointer family & if detected side of hand is the backside
+        // if so, then the code will be executed; in this case the phone will vibrate.
+
+        if (trigger == ManoGestureTrigger.CLICK)
         {
-            // Your code here
             Handheld.Vibrate();
+            count++;
+            counter.text = count.ToString();
         }
     }
 
+    void ShowSkeleton()
+    {
+
+    }
+    /*
     void RecignizeSuck(GestureInfo gesture)
     {
 
@@ -47,4 +55,5 @@ public class HandGesture : MonoBehaviour
             // Code that will execute while continuous gesture is performed
         }
     }
+    */
 }
