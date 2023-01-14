@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHealthSystem
 {
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private int currency;
+    [SerializeField] private int healthpoints;
+    private int maxHealthpoints;
+
+    private void Start()
+    {
+        this.maxHealthpoints = this.healthpoints;
+    }
 
     private void Update()
     {
@@ -38,5 +45,21 @@ public class Player : MonoBehaviour
     public void Interact()
     {
 
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        this.healthpoints -= damage;
+
+        if (this.healthpoints <= 0)
+        {
+            this.Die();
+        }
+    }
+
+    public void Die()
+    {
+        print("Player died!");
+        this.healthpoints = this.maxHealthpoints;
     }
 }

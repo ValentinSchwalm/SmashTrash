@@ -726,6 +726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677040696}
   - component: {fileID: 677040695}
+  - component: {fileID: 677040697}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -747,6 +748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 1559420592}
   currency: 100
+  healthpoints: 50
 --- !u!4 &677040696
 Transform:
   m_ObjectHideFlags: 0
@@ -762,6 +764,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &677040697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677040694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e013754b4c9d6e64587c799921912f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bentFingers: []
+  stretchedFingers: []
 --- !u!1 &761891028
 GameObject:
   m_ObjectHideFlags: 0
