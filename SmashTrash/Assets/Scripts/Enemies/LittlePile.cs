@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LittlePile : MonoBehaviour
+public class LittlePile : Enemy
 {
     [SerializeField] private float damageRange;
 

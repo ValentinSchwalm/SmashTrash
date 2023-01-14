@@ -62,4 +62,14 @@ public class Player : MonoBehaviour, IHealthSystem
         print("Player died!");
         this.healthpoints = this.maxHealthpoints;
     }
+
+    public int maxHealthPoints()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public int currentHealthPoints()
+    {
+        throw new System.NotImplementedException();
+    }
 }
