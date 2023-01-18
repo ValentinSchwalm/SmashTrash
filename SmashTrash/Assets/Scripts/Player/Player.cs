@@ -32,6 +32,12 @@ public class Player : MonoBehaviour, IHealthSystem
         }
     }
 
+    public int Currency 
+    { 
+        get { return this.currency; }
+        set { this.currency = value; }
+    }
+
     public void PrimaryFire()
     {
         this.currentWeapon.Shoot();
@@ -47,6 +53,10 @@ public class Player : MonoBehaviour, IHealthSystem
 
     }
 
+    /// <summary>
+    /// The players healthpoints will decrease by the amount of damage
+    /// </summary>
+    /// <param name="damage"></param>
     public void ReceiveDamage(int damage)
     {
         this.healthpoints -= damage;
@@ -57,19 +67,49 @@ public class Player : MonoBehaviour, IHealthSystem
         }
     }
 
+    /// <summary>
+    /// If the player receives damage and their healthpoints fall below 1 they die
+    /// </summary>
     public void Die()
     {
         print("Player died!");
         this.healthpoints = this.maxHealthpoints;
     }
 
-    public int maxHealthPoints()
+    /// <summary>
+    /// Increases the players healthpoints by the given amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public void IncreaseHealthpoints(int amount)
     {
-        throw new System.NotImplementedException();
+        this.maxHealthpoints += amount;
+        this.healthpoints = this.maxHealthpoints;
     }
 
-    public int currentHealthPoints()
+    /// <summary>
+    /// Increases the ammunition of the current weapon by the given amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public void IncreaseWeaponAmmunition(int amount)
     {
-        throw new System.NotImplementedException();
+        this.currentWeapon.MaxAmmunition += amount;
+    }
+
+    /// <summary>
+    /// Increases the damage of the current weapon by the given amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public void IncreaseWeaponDamage(int amount)
+    {
+        this.currentWeapon.Damage += amount;
+    }
+
+    /// <summary>
+    /// Increases the shooting force (range) of the current weapon by the given amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public void IncreaseWeaponRange(float amount)
+    {
+        this.currentWeapon.ShootingForce += amount;
     }
 }

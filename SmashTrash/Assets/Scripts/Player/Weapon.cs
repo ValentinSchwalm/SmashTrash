@@ -82,6 +82,28 @@ public class Weapon : MonoBehaviour
 
     #endregion
 
+    #region Properties
+
+    public int Damage
+    { 
+        get { return this.damage; } 
+        set { this.damage = value; }
+    }
+
+    public int MaxAmmunition
+    {
+        get { return this.maxAmmunition; }
+        set { this.maxAmmunition = value; }
+    }
+
+    public float ShootingForce
+    {
+        get { return this.shootingForce; } 
+        set { this.shootingForce = value; }
+    }
+
+    #endregion
+
     #region Weapon Methods
 
     public void Shoot()
