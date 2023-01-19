@@ -8,6 +8,7 @@ public class ChasingEnemy : Enemy
     [SerializeField] private float rangeToAttack;
     [SerializeField] private Transform targetToChase;
     private Rigidbody rigidbody;
+    [SerializeField] private Animator animator;
 
     enum EnemyState
     {
@@ -27,12 +28,13 @@ public class ChasingEnemy : Enemy
         if(rangeToAttack > Vector3.Distance(transform.position, targetToChase.position))
         {
             State = EnemyState.Attack;
+            animator.SetBool("Attack", true);
         }
         Vector3 moveDirection = (this.targetToChase.position - this.transform.position).normalized;
         //rigidbody.MovePosition(targetToChase.position);
         //rigidbody.AddForce(moveDirection * movementSpeed * Time.deltaTime);
-        rigidbody.velocity = moveDirection * movementSpeed * Time.deltaTime;
-        print("Chase");
+        rigidbody.velocity = moveDirection * movementSpeed;
+        //print("Chase");
     }
 
     protected virtual void AttackState()
@@ -40,8 +42,9 @@ public class ChasingEnemy : Enemy
         if (rangeToAttack < Vector3.Distance(transform.position, targetToChase.position))
         {
             State = EnemyState.Chase;
+            animator.SetBool("Attack", false);
         }
-        print("Attack");
+        //print("Attack");
     }
 
     public void Attack()
@@ -49,13 +52,13 @@ public class ChasingEnemy : Enemy
 
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         switch (State)
         {
@@ -68,8 +71,10 @@ public class ChasingEnemy : Enemy
             default:
                 break;
         }
+
+        this.transform.rotation = Quaternion.LookRotation(this.transform.position - targetToChase.transform.position);
     }
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, rangeToAttack);
     }
