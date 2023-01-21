@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour
 
     #endregion
 
+    public float Gravity { get { return this.gravity; } }
+
     #region Unity Methods
 
     private void OnDrawGizmos()

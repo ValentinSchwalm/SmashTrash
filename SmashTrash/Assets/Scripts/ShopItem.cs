@@ -15,6 +15,9 @@ public class ShopItem : MonoBehaviour, IInteractible
         this.animator = this.GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Player buys item if they have enough currency.
+    /// </summary>
     public void OnInteract()
     {
         // Check if enough currency
