@@ -8,10 +8,13 @@ public class Player : MonoBehaviour, IHealthSystem
     [SerializeField] private int currency;
     [SerializeField] private int healthpoints;
     private int maxHealthpoints;
+    public Camera mainCamera;
+    public Transform testTransform;
 
     private void Start()
     {
         this.maxHealthpoints = this.healthpoints;
+        //this.mainCamera = Camera.main;
     }
 
     private void Update()
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour, IHealthSystem
         if (Input.GetKey(KeyCode.Mouse0))
         {
             this.PrimaryFire();
+            this.Interact(this.testTransform.position);
         }
 
         if (Input.GetKey(KeyCode.Mouse1))
@@ -30,6 +34,12 @@ public class Player : MonoBehaviour, IHealthSystem
         {
             this.currentWeapon.OnSuckStop();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Gizmos.DrawRay(this.mainCamera.transform.position, (this.testTransform.position - this.mainCamera.transform.position).normalized * 100);
     }
 
     public int Currency 
@@ -48,9 +58,19 @@ public class Player : MonoBehaviour, IHealthSystem
         this.currentWeapon.Suck();
     }
 
-    public void Interact()
+    public void Interact(Vector3 interactionPosition)
     {
+        RaycastHit hit;
 
+        Ray ray = new Ray(this.mainCamera.transform.position, (this.testTransform.position - this.mainCamera.transform.position).normalized * 100);
+        Debug.DrawRay(ray.origin, ray.direction * 100);
+        if (!Physics.Raycast(ray, out hit)) { return; }
+        print(hit.collider.name);
+        IInteractible interactible = hit.collider.GetComponent<IInteractible>();
+        
+        if (interactible == null) { return; }
+
+        interactible.OnInteract();
     }
 
     /// <summary>
