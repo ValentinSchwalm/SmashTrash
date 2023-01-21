@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2810,32 +2810,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b59fcc11f907a45bc0437b08ddadc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter: {fileID: 643094502}
-  count: 0
-  handPoints:
-  - {fileID: 1768209811}
-  - {fileID: 301939188}
-  - {fileID: 2047506659}
-  - {fileID: 1037773624}
-  - {fileID: 135138749}
-  - {fileID: 480178198}
-  - {fileID: 2106020386}
-  - {fileID: 1126092755}
-  - {fileID: 55765698}
-  - {fileID: 1402359233}
-  - {fileID: 196522528}
-  - {fileID: 1975957842}
-  - {fileID: 593393992}
-  - {fileID: 403181073}
-  - {fileID: 2114978753}
-  - {fileID: 408535787}
-  - {fileID: 660836801}
-  - {fileID: 773397758}
-  - {fileID: 1321536844}
-  - {fileID: 278258180}
-  - {fileID: 1945060231}
+  onSuck:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onShoot:
+    m_PersistentCalls:
+      m_Calls: []
   skeletonManager: {fileID: 629305483}
-  objectToInstantiate: {fileID: 2014332914338852825, guid: 9ce8ba38a7601e04b8ba10e4a32d2371,
+  objectToInstantiate: {fileID: 881107743441627478, guid: b108ccdce04920c4f9fe2c7e3fb90efa,
     type: 3}
 --- !u!4 &1915220851
 Transform:
