@@ -16,12 +16,18 @@ public class CheckFingerPosition : MonoBehaviour
     [SerializeField] private Finger[] bent;
     [SerializeField] private Finger[] stretched;
 
+    void Update()
+    {
+        thumb.SetFinger(1, 4, 1);
+        //thumb.startPoint.position = skeletonManager._listOfJoints[1].transform.position;
+        //thumb.endPoint.position = skeletonManager._listOfJoints[4].transform.position;
+        float distance = Vector3.Distance(thumb.startPoint.position, thumb.endPoint.position);
+        print(distance);
+    }
 
     void Initialize()
     {
-        thumb.SetFinger(1, 4, 1);
-        float distance = Vector3.Distance(thumb.startPoint.position, thumb.endPoint.position);
-        print(distance);
+        
     }
 
 
@@ -31,7 +37,7 @@ public class CheckFingerPosition : MonoBehaviour
         foreach (Finger finger in this.bent)
         {
             float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);
-            Console.WriteLine(distance);
+           
             if (distance < finger.range)
             {
                 return false;
@@ -42,7 +48,7 @@ public class CheckFingerPosition : MonoBehaviour
         foreach (Finger finger in this.stretched)
         {
             float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);
-            Console.WriteLine(distance);
+            
             if (distance < finger.range)
             {
                 return false;
@@ -60,12 +66,12 @@ public class CheckFingerPosition : MonoBehaviour
         public Transform endPoint;  // Fingertip
         public float range;
 
-        public void SetFinger(int startPoint, int endPoint, float range)
+        public void SetFinger(int start, int end, float range)
         {
-            this.startPoint.position = skeletonManager._listOfJoints[startPoint].transform.position;
-            this.endPoint.position = skeletonManager._listOfJoints[endPoint].transform.position; ;
+            startPoint.position = skeletonManager._listOfJoints[start].transform.position;
+            endPoint.position = skeletonManager._listOfJoints[end].transform.position;
             this.range = range;
         }
 
-}
+    }
 }

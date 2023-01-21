@@ -7,12 +7,9 @@ using TMPro;
 public class InputManager : MonoBehaviour
 {
     public UnityEvent onSuck, onInteract, onShoot;
-    private GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
     //private CheckFingerPosition check;
     private int count;
-   
 
-    //[SerializeField] private GameObject[] handPoints;
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
     [SerializeField] private TextMeshProUGUI counter;
@@ -20,13 +17,14 @@ public class InputManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() 
-    {   
-        Interact();
-        Suck();
+    {
+        GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
+        Interact(gesture);
+        Suck(gesture);
         // this.ShowSkeleton();
     }
   
-    void Interact()
+    void Interact(GestureInfo gesture)
     {
         ManoGestureTrigger trigger = gesture.mano_gesture_trigger;
 
@@ -34,28 +32,21 @@ public class InputManager : MonoBehaviour
         if (trigger == ManoGestureTrigger.CLICK)
         {
             //onInteract.Invoke();
-            count++;
-            counter.text = count.ToString() + "interact";
             Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
         }
     }
     
-    void Suck()
+    void Suck(GestureInfo gesture)
     {
         ManoGestureContinuous suck = gesture.mano_gesture_continuous;
-        ManoGestureTrigger release = gesture.mano_gesture_trigger;
 
-        // Method that will run while the selected ManoGestureContinuous is performed.
 
+        // Checks if the current visable hand performs a grab trigger gesture
         if (suck == ManoGestureContinuous.CLOSED_HAND_GESTURE)
         {
-            if (release == ManoGestureTrigger.RELEASE_GESTURE)
-            {
-                //onSuck.Invoke();
-                count++;
-                counter.text = count.ToString() + "suck";
-                Handheld.Vibrate();
-            }
+            //onSuck.Invoke();
+            //count++;
+            //counter.text = count.ToString() + "suck";
         }
     }
     /*
