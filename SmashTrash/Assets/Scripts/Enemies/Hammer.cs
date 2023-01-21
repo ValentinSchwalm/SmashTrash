@@ -7,6 +7,7 @@ public class Hammer : ChasingEnemy
     [SerializeField] private GameObject hammerWeapon;
     [SerializeField] private float damageRadius;
     [SerializeField] private LayerMask playerMask;
+    [SerializeField] private Animator animator;
     private List<GameObject> hitObjects = new List<GameObject>();
     private float Timer;
 
@@ -35,7 +36,14 @@ public class Hammer : ChasingEnemy
     protected override void AttackState()
     {
         base.AttackState();
+        animator.SetBool("Attack", true);
         HammerDamage();
+    }
+
+    protected override void ChaseState()
+    {
+        base.ChaseState();
+        animator.SetBool("Attack", false);
     }
 
     protected override void OnDrawGizmos()

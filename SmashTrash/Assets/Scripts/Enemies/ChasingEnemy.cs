@@ -8,7 +8,6 @@ public class ChasingEnemy : Enemy
     [SerializeField] private float rangeToAttack;
     [SerializeField] private Transform targetToChase;
     private Rigidbody rigidbody;
-    [SerializeField] private Animator animator;
 
     enum EnemyState
     {
@@ -23,18 +22,14 @@ public class ChasingEnemy : Enemy
         
     }
 
-    private void ChaseState()
+    protected virtual void ChaseState()
     {
         if(rangeToAttack > Vector3.Distance(transform.position, targetToChase.position))
         {
             State = EnemyState.Attack;
-            animator.SetBool("Attack", true);
         }
         Vector3 moveDirection = (this.targetToChase.position - this.transform.position).normalized;
-        //rigidbody.MovePosition(targetToChase.position);
-        //rigidbody.AddForce(moveDirection * movementSpeed * Time.deltaTime);
         rigidbody.velocity = moveDirection * movementSpeed;
-        //print("Chase");
     }
 
     protected virtual void AttackState()
@@ -42,15 +37,9 @@ public class ChasingEnemy : Enemy
         if (rangeToAttack < Vector3.Distance(transform.position, targetToChase.position))
         {
             State = EnemyState.Chase;
-            animator.SetBool("Attack", false);
         }
-        //print("Attack");
     }
 
-    public void Attack()
-    {
-
-    }
     // Start is called before the first frame update
     protected virtual void Start()
     {
