@@ -8,14 +8,18 @@ public class InputManager : MonoBehaviour
 {
     public UnityEvent onSuck, onInteract, onShoot;
     private GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
-    private CheckFingerPosition check;
+    //private CheckFingerPosition check;
+    private int count;
+   
 
     //[SerializeField] private GameObject[] handPoints;
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
+    [SerializeField] private TextMeshProUGUI counter;
+   
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {   
         Interact();
         Suck();
@@ -30,6 +34,8 @@ public class InputManager : MonoBehaviour
         if (trigger == ManoGestureTrigger.CLICK)
         {
             //onInteract.Invoke();
+            count++;
+            counter.text = count.ToString() + "interact";
             Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
         }
     }
@@ -46,6 +52,8 @@ public class InputManager : MonoBehaviour
             if (release == ManoGestureTrigger.RELEASE_GESTURE)
             {
                 //onSuck.Invoke();
+                count++;
+                counter.text = count.ToString() + "suck";
                 Handheld.Vibrate();
             }
         }
