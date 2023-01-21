@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Gamescene.unity
     guid: 6bdce89659816455b9f906fc62d19910
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 1926338f20ce96943bb7472cce2f1f05
+  - enabled: 1
     path: Assets/Scenes/Hand Gesture Recognition.unity
     guid: 7268650e156c34343850f32d89a20902
   m_configObjects:
