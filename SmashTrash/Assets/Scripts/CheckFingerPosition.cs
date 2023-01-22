@@ -27,8 +27,8 @@ public class CheckFingerPosition : MonoBehaviour
 
     void Update()
     {
-        Finger[] stretched = new Finger[2];
-        Finger[] bent = new Finger[3];
+        stretched = new Finger[2];
+        bent = new Finger[3];
 
         stretched[0] = thumb;
         stretched[1] = index;
@@ -53,6 +53,9 @@ public class CheckFingerPosition : MonoBehaviour
 
     private bool CheckPistolGesture()
     {
+        shoot.text = "not shooting!";
+
+
         // Check bent fingers
         foreach (Finger finger in this.bent)
         {
