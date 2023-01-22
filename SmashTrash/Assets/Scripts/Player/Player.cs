@@ -9,8 +9,10 @@ public class Player : MonoBehaviour, IHealthSystem
     [SerializeField] private int currency;
     [SerializeField] private int healthpoints;
     private int maxHealthpoints;
-    public Camera mainCamera;
-    public Transform testTransform;
+    public Transform interactionTransform;
+
+    private bool sucking;
+    private SkeletonManager skeletonManager;
 
     [Header("UI")]
     [SerializeField] private Image healthbar;
@@ -19,25 +21,36 @@ public class Player : MonoBehaviour, IHealthSystem
     private void Start()
     {
         this.maxHealthpoints = this.healthpoints;
-        //this.mainCamera = Camera.main;
+        this.skeletonManager = FindObjectOfType<SkeletonManager>();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            this.PrimaryFire();
-            this.Interact(this.testTransform.position);
-        }
+        //if (Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    this.PrimaryFire();
+        //    this.Interact(this.interactionTransform.position);
+        //}
 
-        if (Input.GetKey(KeyCode.Mouse1))
+        //if (Input.GetKey(KeyCode.Mouse1))
+        //{
+        //    this.SecondaryFire();
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.Mouse1))
+        //{
+        //    this.currentWeapon.OnSuckStop();
+        //}
+        Vector3 pos1 = this.skeletonManager._listOfJoints[4].transform.position;
+        Vector3 pos2 = this.skeletonManager._listOfJoints[8].transform.position;
+
+        Vector3 newPos = pos1 + (pos2 - pos1).normalized * (Vector3.Distance(pos1, pos2) / 2);
+
+        this.interactionTransform.position = newPos;
+
+        if (this.sucking)
         {
             this.SecondaryFire();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            this.currentWeapon.OnSuckStop();
         }
     }
 
@@ -53,32 +66,57 @@ public class Player : MonoBehaviour, IHealthSystem
         set { this.currency = value; }
     }
 
-    public void PrimaryFire()
+    private void PrimaryFire()
     {
         this.currentWeapon.Shoot();
 
         this.ammunitionbar.fillAmount = (float)this.currentWeapon.Ammunition / (float)this.currentWeapon.MaxAmmunition;
     }
 
-    public void SecondaryFire()
+    private void SecondaryFire()
     {
         this.currentWeapon.Suck();
         this.ammunitionbar.fillAmount = (float)this.currentWeapon.Ammunition / (float)this.currentWeapon.MaxAmmunition;
     }
 
-    public void Interact(Vector3 interactionPosition)
+    private void Interact()
     {
         RaycastHit hit;
 
-        Ray ray = new Ray(this.mainCamera.transform.position, (this.testTransform.position - this.mainCamera.transform.position).normalized * 100);
-        Debug.DrawRay(ray.origin, ray.direction * 100);
+        Ray ray = new Ray(Camera.main.transform.position, (this.interactionTransform.position - Camera.main.transform.position).normalized * 100);
+        
         if (!Physics.Raycast(ray, out hit)) { return; }
-        print(hit.collider.name);
+        
         IInteractible interactible = hit.collider.GetComponent<IInteractible>();
         
         if (interactible == null) { return; }
 
         interactible.OnInteract();
+    }
+
+    public void OnShoot()
+    {
+        this.PrimaryFire();
+        print("shoot");
+    }
+
+    public void OnSuckDown()
+    {
+        this.sucking = true;
+        print("start sucking");
+    }
+
+    public void OnSuckUp()
+    {
+        this.sucking = false;
+        this.currentWeapon.OnSuckStop();
+        print("stop sucking");
+    }
+
+    public void OnInteract()
+    {
+        this.Interact();
+        print("interact");
     }
 
     /// <summary>

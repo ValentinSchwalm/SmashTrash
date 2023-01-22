@@ -15,9 +15,9 @@ public class CheckFingerPosition : MonoBehaviour
     [SerializeField] private Finger pinkie;
     [SerializeField] public Finger[] bent;
     [SerializeField] public Finger[] stretched;
-    [SerializeField] public TextMeshProUGUI stretched_;
-    [SerializeField] public TextMeshProUGUI bent_;
-    [SerializeField] public TextMeshProUGUI shoot;
+    // [SerializeField] public TextMeshProUGUI stretched_;
+    // [SerializeField] public TextMeshProUGUI bent_;
+    // [SerializeField] public TextMeshProUGUI shoot;
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class CheckFingerPosition : MonoBehaviour
 
     private bool CheckPistolGesture()
     {
-        shoot.text = "not shooting!";
+        // shoot.text = "not shooting!";
 
 
         // Check bent fingers
@@ -63,7 +63,7 @@ public class CheckFingerPosition : MonoBehaviour
            
             if (distance > finger.range)
             {
-                bent_.text = "finger is not bent";
+                // bent_.text = "finger is not bent";
                 return false;
             }
         }
@@ -75,13 +75,13 @@ public class CheckFingerPosition : MonoBehaviour
             
             if (distance < finger.range)
             {
-                stretched_.text = "finger is not stretched";
+                // stretched_.text = "finger is not stretched";
                 return false;
             }
         }
 
         // Return true if all fingers have been checked correctly
-        shoot.text = "shoot!";
+        // shoot.text = "shoot!";
         return true;
     }
 
