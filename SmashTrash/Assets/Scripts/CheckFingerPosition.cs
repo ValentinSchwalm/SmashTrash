@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CheckFingerPosition : MonoBehaviour
 {
-    [SerializeField] public static SkeletonManager skeletonManager;
+    private static SkeletonManager skeletonManager;
     [SerializeField] private Finger thumb;
     [SerializeField] private Finger index;
     [SerializeField] private Finger middle;
@@ -15,6 +15,12 @@ public class CheckFingerPosition : MonoBehaviour
     [SerializeField] private Finger[] all;
     [SerializeField] private Finger[] bent;
     [SerializeField] private Finger[] stretched;
+
+    private void Start()
+    {
+        // Inizialize Skeleton Mmanager
+        skeletonManager = FindObjectOfType<SkeletonManager>();
+    }
 
     void Update()
     {
@@ -68,8 +74,8 @@ public class CheckFingerPosition : MonoBehaviour
 
         public void SetFinger(int start, int end, float range)
         {
-            startPoint.position = skeletonManager._listOfJoints[start].transform.position;
-            endPoint.position = skeletonManager._listOfJoints[end].transform.position;
+            startPoint = skeletonManager._listOfJoints[start].transform;
+            endPoint = skeletonManager._listOfJoints[end].transform;
             this.range = range;
         }
     }

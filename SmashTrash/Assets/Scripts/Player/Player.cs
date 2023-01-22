@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IHealthSystem
 {
@@ -10,6 +11,10 @@ public class Player : MonoBehaviour, IHealthSystem
     private int maxHealthpoints;
     public Camera mainCamera;
     public Transform testTransform;
+
+    [Header("UI")]
+    [SerializeField] private Image healthbar;
+    [SerializeField] private Image ammunitionbar;
 
     private void Start()
     {
@@ -51,11 +56,14 @@ public class Player : MonoBehaviour, IHealthSystem
     public void PrimaryFire()
     {
         this.currentWeapon.Shoot();
+
+        this.ammunitionbar.fillAmount = (float)this.currentWeapon.Ammunition / (float)this.currentWeapon.MaxAmmunition;
     }
 
     public void SecondaryFire()
     {
         this.currentWeapon.Suck();
+        this.ammunitionbar.fillAmount = (float)this.currentWeapon.Ammunition / (float)this.currentWeapon.MaxAmmunition;
     }
 
     public void Interact(Vector3 interactionPosition)
@@ -80,6 +88,7 @@ public class Player : MonoBehaviour, IHealthSystem
     public void ReceiveDamage(int damage)
     {
         this.healthpoints -= damage;
+        this.healthbar.fillAmount = (float)this.healthpoints / (float)this.maxHealthpoints;
 
         if (this.healthpoints <= 0)
         {

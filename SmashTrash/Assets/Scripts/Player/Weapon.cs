@@ -102,6 +102,11 @@ public class Weapon : MonoBehaviour
         set { this.shootingForce = value; }
     }
 
+    public int Ammunition
+    {
+        get { return this.ammunition; }
+    }
+
     #endregion
 
     #region Weapon Methods
