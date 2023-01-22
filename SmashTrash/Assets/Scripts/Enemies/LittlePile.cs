@@ -47,7 +47,6 @@ public class LittlePile : Enemy
                 healthSystem.ReceiveDamage(this.damage);
                 hitObjects.Add(item.gameObject);
                 TimeBetweenDamage = 0.5f;
-                print("hehehehe");
             }
         }
 

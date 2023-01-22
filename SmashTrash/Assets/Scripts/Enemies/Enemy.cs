@@ -9,10 +9,19 @@ public class Enemy : MonoBehaviour, IHealthSystem
     [SerializeField] protected int damage;
     protected int currentHealth;
     [SerializeField] protected int maxHealth;
+    [SerializeField] protected GameObject DroppedTrash;
+    [SerializeField] protected GameObject DroppedGold;
+    [SerializeField] protected int AmountOfTrashDropped;
 
     public void Die()
     {
         Destroy(gameObject);
+        Instantiate(DroppedGold, new Vector3(this.transform.position.x + 1, this.transform.position.y + 1, this.transform.position.z), Quaternion.identity);
+        for (int i = 0; i < AmountOfTrashDropped; i++)
+        {
+            Instantiate(DroppedTrash, new Vector3(this.transform.position.x + Random.Range(-1f, 1f), this.transform.position.y + i, this.transform.position.z + Random.Range(-1f, 1f)), Quaternion.identity);
+        }
+        
     }
 
     public void ReceiveDamage(int damage)
