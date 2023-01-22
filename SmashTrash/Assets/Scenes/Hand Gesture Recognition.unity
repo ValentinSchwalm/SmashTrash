@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1097,6 +1097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1915220851}
   - component: {fileID: 1915220850}
+  - component: {fileID: 1915220852}
   m_Layer: 0
   m_Name: ManoMotionTest
   m_TagString: Untagged
@@ -1144,3 +1145,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915220852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915220849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e013754b4c9d6e64587c799921912f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thumb:
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    range: 0
+  index:
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    range: 0
+  middle:
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    range: 0
+  ring:
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    range: 0
+  pinkie:
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    range: 0
+  all: []
+  bent: []
+  stretched: []

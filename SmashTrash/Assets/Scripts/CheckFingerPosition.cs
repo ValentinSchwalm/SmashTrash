@@ -72,6 +72,5 @@ public class CheckFingerPosition : MonoBehaviour
             endPoint.position = skeletonManager._listOfJoints[end].transform.position;
             this.range = range;
         }
-
     }
 }
