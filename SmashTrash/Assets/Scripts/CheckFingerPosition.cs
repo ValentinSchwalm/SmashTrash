@@ -23,12 +23,18 @@ public class CheckFingerPosition : MonoBehaviour
     {
         // Inizialize Skeleton Mmanager
         skeletonManager = FindObjectOfType<SkeletonManager>();
+        Initialize();
     }
 
     void Update()
     {
-        Finger[] stretched = new Finger[2];
-        Finger[] bent = new Finger[3];
+        CheckPistolGesture();
+    }
+
+    void Initialize()
+    {
+        stretched = new Finger[2];
+        bent = new Finger[3];
 
         stretched[0] = thumb;
         stretched[1] = index;
@@ -41,13 +47,6 @@ public class CheckFingerPosition : MonoBehaviour
         middle.SetFinger(9, 12, 0.3);
         ring.SetFinger(13, 16, 0.3);
         pinkie.SetFinger(17, 20, 0.3);
-
-        CheckPistolGesture();
-    }
-
-    void Initialize()
-    {
-        
     }
 
 
@@ -68,7 +67,7 @@ public class CheckFingerPosition : MonoBehaviour
         // Check stretched fingers
         foreach (Finger finger in this.stretched)
         {
-            float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);
+            float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);   
             
             if (distance < finger.range)
             {

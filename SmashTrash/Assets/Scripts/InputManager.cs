@@ -21,15 +21,16 @@ public class InputManager : MonoBehaviour
         GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
         Interact(gesture);
         Suck(gesture);
+        Shoot(gesture);
         // this.ShowSkeleton();
     }
   
     void Interact(GestureInfo gesture)
     {
-        ManoGestureTrigger trigger = gesture.mano_gesture_trigger;
+        ManoGestureTrigger interaction = gesture.mano_gesture_trigger;
 
         // Checks if the current visable hand performs a click trigger gesture
-        if (trigger == ManoGestureTrigger.CLICK)
+        if (interaction == ManoGestureTrigger.CLICK)
         {
             onInteract.Invoke();
             //Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
@@ -49,12 +50,15 @@ public class InputManager : MonoBehaviour
             //counter.text = count.ToString() + "suck";
         }
     }
-    /*
-    void Shoot()
+    
+    void Shoot(GestureInfo gesture)
     {
-        if ()
+        ManoGestureContinuous trigger = gesture.mano_gesture_continuous;
+
+        if (trigger == ManoGestureContinuous.POINTER_GESTURE)
         {
             onShoot.Invoke();
+            print("hurra");
         }
     }
 
