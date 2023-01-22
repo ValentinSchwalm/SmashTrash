@@ -44,6 +44,7 @@ public class ChasingEnemy : Enemy
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame

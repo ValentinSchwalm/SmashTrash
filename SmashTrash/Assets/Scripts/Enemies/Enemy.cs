@@ -5,33 +5,30 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IHealthSystem
 {
-    protected Image healthBarUI;
+    [SerializeField] protected Image healthBarUI;
     [SerializeField] protected int damage;
-
-    public int currentHealthPoints()
-    {
-        throw new System.NotImplementedException();
-    }
+    protected int currentHealth;
+    [SerializeField] protected int maxHealth;
 
     public void Die()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public int maxHealthPoints()
-    {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
     public void ReceiveDamage(int damage)
     {
-        throw new System.NotImplementedException();
+        currentHealth -= damage;
+        healthBarUI.fillAmount = ((float)currentHealth / (float)maxHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

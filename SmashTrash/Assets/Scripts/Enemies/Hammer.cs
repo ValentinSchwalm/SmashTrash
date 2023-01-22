@@ -51,7 +51,10 @@ public class Hammer : ChasingEnemy
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(hammerWeapon.transform.position, damageRadius);
     }
-
+    protected override void Start()
+    {
+        base.Start();
+    }
     protected override void Update()
     {
         base.Update();
