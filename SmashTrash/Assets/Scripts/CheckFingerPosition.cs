@@ -15,23 +15,17 @@ public class CheckFingerPosition : MonoBehaviour
     [SerializeField] private Finger pinkie;
     [SerializeField] public Finger[] bent;
     [SerializeField] public Finger[] stretched;
-    [SerializeField] public TextMeshProUGUI stretched_;
-    [SerializeField] public TextMeshProUGUI bent_;
-    [SerializeField] public TextMeshProUGUI shoot;
+    // [SerializeField] public TextMeshProUGUI stretched_;
+    // [SerializeField] public TextMeshProUGUI bent_;
+    // [SerializeField] public TextMeshProUGUI shoot;
 
     private void Start()
     {
         // Inizialize Skeleton Mmanager
         skeletonManager = FindObjectOfType<SkeletonManager>();
-        Initialize();
     }
 
     void Update()
-    {
-        CheckPistolGesture();
-    }
-
-    void Initialize()
     {
         stretched = new Finger[2];
         bent = new Finger[3];
@@ -47,11 +41,21 @@ public class CheckFingerPosition : MonoBehaviour
         middle.SetFinger(9, 12, 0.3);
         ring.SetFinger(13, 16, 0.3);
         pinkie.SetFinger(17, 20, 0.3);
+
+        CheckPistolGesture();
+    }
+
+    void Initialize()
+    {
+        
     }
 
 
     private bool CheckPistolGesture()
     {
+        // shoot.text = "not shooting!";
+
+
         // Check bent fingers
         foreach (Finger finger in this.bent)
         {
@@ -59,7 +63,7 @@ public class CheckFingerPosition : MonoBehaviour
            
             if (distance > finger.range)
             {
-                bent_.text = "finger is not bent";
+                // bent_.text = "finger is not bent";
                 return false;
             }
         }
@@ -67,17 +71,17 @@ public class CheckFingerPosition : MonoBehaviour
         // Check stretched fingers
         foreach (Finger finger in this.stretched)
         {
-            float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);   
+            float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);
             
             if (distance < finger.range)
             {
-                stretched_.text = "finger is not stretched";
+                // stretched_.text = "finger is not stretched";
                 return false;
             }
         }
 
         // Return true if all fingers have been checked correctly
-        shoot.text = "shoot!";
+        // shoot.text = "shoot!";
         return true;
     }
 

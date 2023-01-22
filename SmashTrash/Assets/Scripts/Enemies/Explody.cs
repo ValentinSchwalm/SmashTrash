@@ -13,11 +13,9 @@ public class Explody : ChasingEnemy
     private void Explode()
     {
         Collider[] playerCollider = Physics.OverlapSphere(this.transform.position, ExplosionRange, playerMask);
-        print("before");
         foreach (var item in playerCollider)
         {
             IHealthSystem healthSystem = item.GetComponent<IHealthSystem>();
-            print("Boom");
             if (healthSystem != null && !hitObjects.Contains(item.gameObject))
             {
                 healthSystem.ReceiveDamage(this.damage);

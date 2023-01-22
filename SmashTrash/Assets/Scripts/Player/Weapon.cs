@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     [Header("Input")]
     [SerializeField] private Transform originPoint;
     [SerializeField] private Transform destinationPoint;
+    private SkeletonManager skeletonManager;
 
     [Header("Shoot Stats")]
     [SerializeField] private int damage;
@@ -68,12 +69,17 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        // Initialize ammunition
+        // Initialize variables
         this.ammunition = this.maxAmmunition;
+        this.skeletonManager = FindObjectOfType<SkeletonManager>();      
     }
 
     private void Update()
     {
+        // Set Inputs
+        this.originPoint.position = this.skeletonManager._listOfJoints[5].transform.position;
+        this.destinationPoint.position = this.skeletonManager._listOfJoints[8].transform.position;
+
         if (this.cooldown > 0)
         {
             this.cooldown -= Time.deltaTime;
@@ -119,11 +125,17 @@ public class Weapon : MonoBehaviour
         }
 
         // Shoot
-        Vector3 initialVelocity = (this.destinationPoint.position - this.originPoint.position).normalized;
-        initialVelocity *= this.shootingForce;
+        //Vector3 initialVelocity = (this.destinationPoint.position - this.originPoint.position).normalized;
+        //initialVelocity *= this.shootingForce;
 
+        Vector3 initialVelocity = Camera.main.transform.forward;
+        initialVelocity += (this.destinationPoint.position - this.originPoint.position).normalized;
+        initialVelocity.Normalize();
+        initialVelocity *= this.shootingForce;
         Projectile projectile = Instantiate(this.projectile, this.destinationPoint.position, Quaternion.identity);
         projectile.InitiateProjectile(this.damage, initialVelocity);
+
+
 
         this.cooldown = this.cooldownValue;
         this.ammunition--;
