@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
-    [SerializeField] private TextMeshProUGUI counter;
+    //[SerializeField] private TextMeshProUGUI counter;
    
 
     // Update is called once per frame
@@ -31,8 +31,8 @@ public class InputManager : MonoBehaviour
         // Checks if the current visable hand performs a click trigger gesture
         if (trigger == ManoGestureTrigger.CLICK)
         {
-            //onInteract.Invoke();
-            Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
+            onInteract.Invoke();
+            //Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
         }
     }
     
@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
         // Checks if the current visable hand performs a grab trigger gesture
         if (suck == ManoGestureContinuous.CLOSED_HAND_GESTURE)
         {
-            //onSuck.Invoke();
+            onSuck.Invoke();
             //count++;
             //counter.text = count.ToString() + "suck";
         }

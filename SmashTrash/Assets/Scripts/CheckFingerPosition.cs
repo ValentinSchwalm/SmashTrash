@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using TMPro;
 
 public class CheckFingerPosition : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class CheckFingerPosition : MonoBehaviour
     [SerializeField] private Finger middle;
     [SerializeField] private Finger ring;
     [SerializeField] private Finger pinkie;
-    [SerializeField] private Finger[] all;
-    [SerializeField] private Finger[] bent;
-    [SerializeField] private Finger[] stretched;
+    [SerializeField] public Finger[] bent;
+    [SerializeField] public Finger[] stretched;
+    [SerializeField] public TextMeshProUGUI stretched_;
+    [SerializeField] public TextMeshProUGUI bent_;
+    [SerializeField] public TextMeshProUGUI shoot;
 
     private void Start()
     {
@@ -24,11 +27,22 @@ public class CheckFingerPosition : MonoBehaviour
 
     void Update()
     {
-        thumb.SetFinger(1, 4, 1);
-        //thumb.startPoint.position = skeletonManager._listOfJoints[1].transform.position;
-        //thumb.endPoint.position = skeletonManager._listOfJoints[4].transform.position;
-        float distance = Vector3.Distance(thumb.startPoint.position, thumb.endPoint.position);
-        print(distance);
+        Finger[] stretched = new Finger[2];
+        Finger[] bent = new Finger[3];
+
+        stretched[0] = thumb;
+        stretched[1] = index;
+        bent[0] = middle;
+        bent[1] = ring;
+        bent[2] = pinkie;
+        
+        thumb.SetFinger(1, 4, 1.0);
+        index.SetFinger(5, 8, 1.0);
+        middle.SetFinger(9, 12, 0.3);
+        ring.SetFinger(13, 16, 0.3);
+        pinkie.SetFinger(17, 20, 0.3);
+
+        CheckPistolGesture();
     }
 
     void Initialize()
@@ -44,8 +58,9 @@ public class CheckFingerPosition : MonoBehaviour
         {
             float distance = Vector3.Distance(finger.startPoint.position, finger.endPoint.position);
            
-            if (distance < finger.range)
+            if (distance > finger.range)
             {
+                bent_.text = "finger is not bent";
                 return false;
             }
         }
@@ -57,11 +72,13 @@ public class CheckFingerPosition : MonoBehaviour
             
             if (distance < finger.range)
             {
+                stretched_.text = "finger is not stretched";
                 return false;
             }
         }
 
         // Return true if all fingers have been checked correctly
+        shoot.text = "shoot!";
         return true;
     }
 
@@ -70,9 +87,9 @@ public class CheckFingerPosition : MonoBehaviour
     {
         public Transform startPoint;  // Palm
         public Transform endPoint;  // Fingertip
-        public float range;
+        public double range;
 
-        public void SetFinger(int start, int end, float range)
+        public void SetFinger(int start, int end, double range)
         {
             startPoint = skeletonManager._listOfJoints[start].transform;
             endPoint = skeletonManager._listOfJoints[end].transform;
