@@ -9,9 +9,12 @@ public class Enemy : MonoBehaviour, IHealthSystem
     [SerializeField] protected int damage;
     protected int currentHealth;
     [SerializeField] protected int maxHealth;
+    [SerializeField] private int enemyScore;
+    public SaveLoadHighScore saveLoadHighScore;
 
     public void Die()
     {
+        saveLoadHighScore.currentScore += enemyScore;
         Destroy(gameObject);
     }
 
