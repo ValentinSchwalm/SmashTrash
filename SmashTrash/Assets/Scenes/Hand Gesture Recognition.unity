@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 185977859}
   - component: {fileID: 185977858}
   - component: {fileID: 185977857}
+  - component: {fileID: 185977861}
+  - component: {fileID: 185977860}
   m_Layer: 0
   m_Name: AR Session
   m_TagString: Untagged
@@ -317,6 +319,33 @@ Transform:
   m_Father: {fileID: 1661231053}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &185977860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185977856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlanePrefab: {fileID: 559455262}
+  m_DetectionMode: -1
+--- !u!114 &185977861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185977856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520bb47c46cf8624fafb307b7d1b862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
 --- !u!1 &247975245
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,8 +513,6 @@ GameObject:
   m_Component:
   - component: {fileID: 412874910}
   - component: {fileID: 412874909}
-  - component: {fileID: 412874912}
-  - component: {fileID: 412874911}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -522,33 +549,6 @@ Transform:
   m_Father: {fileID: 1661231053}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &412874911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412874908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastPrefab: {fileID: 0}
---- !u!114 &412874912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412874908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 559455262}
-  m_DetectionMode: 1
 --- !u!1001 &546475689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1532,6 +1532,7 @@ GameObject:
   - component: {fileID: 1000601980}
   - component: {fileID: 1000601979}
   - component: {fileID: 1000601978}
+  - component: {fileID: 1000601983}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: MainCamera
@@ -1648,6 +1649,24 @@ Transform:
   m_Father: {fileID: 412874910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1000601983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000601976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!1 &1096599040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,7 +2096,7 @@ MonoBehaviour:
     transformToSpawn: {fileID: 1990092187}
   objectToSpawn: {fileID: 3580640565043667770, guid: 42be22f6f42162e4a8361ca04b04ca73,
     type: 3}
-  raycastManager: {fileID: 412874911}
+  raycastManager: {fileID: 0}
 --- !u!1001 &1789037757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2133,6 +2152,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114640345446220430, guid: f5ada212b3b98412ea46723d2f7d7fac,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1000601977}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5ada212b3b98412ea46723d2f7d7fac, type: 3}
 --- !u!1 &1815126666
