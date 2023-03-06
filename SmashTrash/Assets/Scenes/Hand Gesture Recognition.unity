@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 3935468396240863706, guid: 7bd5f89c44f21724c94e02a05ed50be4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.47
+      value: 5.96
       objectReference: {fileID: 0}
     - target: {fileID: 3935468396240863706, guid: 7bd5f89c44f21724c94e02a05ed50be4,
         type: 3}
@@ -673,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 5256980466752796124, guid: 0f8504ddba966c5459c5954aff90da2d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9196233350691410031, guid: 0f8504ddba966c5459c5954aff90da2d,
         type: 3}
@@ -1147,6 +1147,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1000601977}
+    - target: {fileID: 114251843207838166, guid: 3b19460acec7fad4baeab3db2a8268e1,
+        type: 3}
+      propertyPath: _licenseKey
+      value: BPYYB-QIERB-AOKHO-YWLIQ
+      objectReference: {fileID: 0}
     - target: {fileID: 114656061702543436, guid: 3b19460acec7fad4baeab3db2a8268e1,
         type: 3}
       propertyPath: statusAnimator
@@ -1661,7 +1666,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000601976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
   m_Name: 
