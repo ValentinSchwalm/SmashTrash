@@ -28,6 +28,10 @@ public class InputManager : MonoBehaviour
     {
         this.shoot.text = "not shooting";
         GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
+
+        this.interact.text = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.ToString();
+        this.shoot.text = ManomotionManager.Instance.ToString();
+
         Interact(gesture);
         //Suck(gesture);
         Shoot(gesture);
