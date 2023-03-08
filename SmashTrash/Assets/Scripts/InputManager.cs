@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
     public UnityEvent onSuckUp, onSuckDown, onInteract, onShoot;
     //private CheckFingerPosition check;
     private int count;
+
+    [Range(0, 1)] [SerializeField] private float skeletonSmoothing;
 
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
@@ -28,12 +31,12 @@ public class InputManager : MonoBehaviour
     {
         this.shoot.text = "not shooting";
         GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
-
-        this.interact.text = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.ToString();
-        this.shoot.text = ManomotionManager.Instance.ToString();
+        print("Gesture: " + gesture);
+        print("ManoManager: " + ManomotionManager.Instance.name);
+        counter.text = "not entering";
+        ManomotionManager.Instance.SetManoMotionSmoothingValue(this.skeletonSmoothing);
 
         Interact(gesture);
-        //Suck(gesture);
         Shoot(gesture);
         OnSuckDown(gesture);
         OnSuckUp(gesture);
@@ -52,20 +55,6 @@ public class InputManager : MonoBehaviour
             this.interact.text = "interact" + this.count;
         }
     }
-    
-    //void Suck(GestureInfo gesture)
-    //{
-    //    ManoGestureContinuous suck = gesture.mano_gesture_continuous;
-
-
-    //    // Checks if the current visable hand performs a grab trigger gesture
-    //    if (suck == ManoGestureContinuous.CLOSED_HAND_GESTURE)
-    //    {
-    //        onSuck.Invoke();
-    //        //count++;
-    //        //counter.text = count.ToString() + "suck";
-    //    }
-    //}
 
     void OnSuckDown(GestureInfo gesture)
     {
@@ -78,7 +67,6 @@ public class InputManager : MonoBehaviour
             //count++;
             //counter.text = count.ToString() + "suck";
             this.suck.text = "sucking";
-
         }
     }
 
@@ -98,6 +86,8 @@ public class InputManager : MonoBehaviour
     {
         ManoGestureContinuous trigger = gesture.mano_gesture_continuous;
 
+        this.counter.text = "entering: " + gesture.mano_gesture_continuous;
+
         if (trigger == ManoGestureContinuous.POINTER_GESTURE && trigger != ManoGestureContinuous.OPEN_PINCH_GESTURE)
         {
             onShoot.Invoke();
@@ -105,4 +95,18 @@ public class InputManager : MonoBehaviour
             this.shoot.text = "shooting";
         }
     }
+
+    //void Suck(GestureInfo gesture)
+    //{
+    //    ManoGestureContinuous suck = gesture.mano_gesture_continuous;
+
+
+    //    // Checks if the current visable hand performs a grab trigger gesture
+    //    if (suck == ManoGestureContinuous.CLOSED_HAND_GESTURE)
+    //    {
+    //        onSuck.Invoke();
+    //        //count++;
+    //        //counter.text = count.ToString() + "suck";
+    //    }
+    //}
 }

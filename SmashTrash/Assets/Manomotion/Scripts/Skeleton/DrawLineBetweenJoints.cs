@@ -34,7 +34,7 @@ public class DrawLineBetweenJoints : MonoBehaviour
     /// Draws out the skeleton with line renderers. 
     /// if useWrist is true it will need one extra postion, and if usePalm is true it will use two extra positions.
     /// </summary>
-    private void DrawOutJointLInes()
+    public void DrawOutJointLInes()
     {
         lineRenderer.SetPosition(0, nextJoint[0].position);
         lineRenderer.SetPosition(1, nextJoint[1].position);

@@ -5,6 +5,7 @@ using System;
 
 namespace CameraSystem
 {
+    /*
     public class InputManagerAdjustable : InputManagerBaseClass
     {
         #region consts
@@ -303,4 +304,5 @@ namespace CameraSystem
 
         #endregion
     }
+    */
 }
