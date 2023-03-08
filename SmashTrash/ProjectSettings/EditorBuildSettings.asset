@@ -11,15 +11,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StartScene.unity
     guid: 1926338f20ce96943bb7472cce2f1f05
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Hand Gesture Recognition.unity
     guid: 7268650e156c34343850f32d89a20902
   - enabled: 0
     path: Assets/Manomotion/Scenes/ManoMotionSDKPro.unity
     guid: 2e8ecbb9ea2e340009ac8d7dd6fbd854
-  - enabled: 1
+  - enabled: 0
     path: Assets/ManoMotion ARFoundation/Scenes/ManoMotionSDKProFeatures.unity
     guid: f0d57f5ce7121dd43a002cc61f754cc7
+  - enabled: 0
+    path: Assets/ManoMotion ARFoundation/Scenes/GameplayScene.unity
+    guid: 4fc33628eaec40540b0b850817bd3bca
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
