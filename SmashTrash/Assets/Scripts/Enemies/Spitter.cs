@@ -49,7 +49,7 @@ public class Spitter : Enemy
         {
             Vector3 patrollingZoneDistance = ((this.transform.position - this.distanceToTarget.position).normalized);
             Vector3 newPosition = this.distanceToTarget.position + patrollingZoneDistance * patrollingDistance;
-            Vector3 newerPosition = new Vector3(newPosition.x + Random.Range(-patrollingRange, patrollingRange), 0.5f, newPosition.z + Random.Range(-patrollingRange, patrollingRange));
+            Vector3 newerPosition = new Vector3(newPosition.x + Random.Range(-patrollingRange, patrollingRange), this.transform.position.y, newPosition.z + Random.Range(-patrollingRange, patrollingRange));
             nextPos = newerPosition;
         }
 

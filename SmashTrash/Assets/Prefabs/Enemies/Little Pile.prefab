@@ -115,20 +115,12 @@ MonoBehaviour:
   healthBarUI: {fileID: 0}
   damage: 1
   maxHealth: 1
-  DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
-    type: 3}
-  DroppedGold: {fileID: 4254455456937751087, guid: 32fecf9d18b9b744b907a85d46783f5d,
-    type: 3}
-  AmountOfTrashDropped: 6
+  enemyScore: 1
+  saveLoadHighScore: {fileID: 0}
   damageRange: 1.5
-  Target: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  MetalPile: {fileID: 2630785381051465494, guid: 7bd5f89c44f21724c94e02a05ed50be4,
-    type: 3}
-  WoodPile: {fileID: 3580640565043667770, guid: 42be22f6f42162e4a8361ca04b04ca73,
-    type: 3}
 --- !u!1001 &3126407994136539186
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class LittlePile : Enemy
 {
     [SerializeField] private float damageRange;
-    [SerializeField] private Transform Target;
+    private Transform Target;
     [SerializeField] private LayerMask playerMask;
     private List<GameObject> hitObjects = new List<GameObject>();
     private float TimeBetweenDamage;
@@ -61,7 +61,7 @@ public class LittlePile : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+        Target = Camera.main.transform;
     }
 
     // Update is called once per frame
