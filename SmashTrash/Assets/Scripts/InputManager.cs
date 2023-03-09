@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class InputManager : MonoBehaviour
 {
@@ -16,13 +17,14 @@ public class InputManager : MonoBehaviour
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
     [SerializeField] private TextMeshProUGUI counter;
-
     [SerializeField] private TextMeshProUGUI suck, interact, shoot;
+    [SerializeField] private MeshRenderer originMaterial, destinationMaterial;
 
     private void Start()
     {
         this.interact.text = "interact" + this.count;
         this.suck.text = "not sucking";
+        
     }
 
 
@@ -48,20 +50,25 @@ public class InputManager : MonoBehaviour
         if (interaction == ManoGestureTrigger.CLICK)
         {
             onInteract.Invoke();
+            originMaterial.material.color = Color.green;
+            destinationMaterial.material.color = Color.green;
             //Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
             this.count++;
             this.interact.text = "interact" + this.count;
+
         }
     }
 
     void OnSuckDown(GestureInfo gesture)
     {
-        ManoGestureTrigger suck = gesture.mano_gesture_trigger;
+        ManoGestureContinuous suck = gesture.mano_gesture_continuous;
 
-        // Checks if the current visable hand performs a grab trigger gesture
-        if (suck == ManoGestureTrigger.GRAB_GESTURE && gesture.hand_side == HandSide.Backside)
+        // Checks if the current visable hand performs a grab gesture
+        if (suck == ManoGestureContinuous.OPEN_HAND_GESTURE)
         {
             onSuckDown.Invoke();
+            originMaterial.material.color = Color.yellow;
+            destinationMaterial.material.color = Color.yellow;
             //count++;
             //counter.text = count.ToString() + "suck";
             this.suck.text = "sucking";
@@ -70,12 +77,14 @@ public class InputManager : MonoBehaviour
 
     void OnSuckUp(GestureInfo gesture)
     {
-        ManoGestureTrigger suck = gesture.mano_gesture_trigger;
+        ManoGestureContinuous suck = gesture.mano_gesture_continuous;
 
         // Checks if the current visable hand performs a grab trigger gesture
-        if (suck == ManoGestureTrigger.RELEASE_GESTURE && gesture.hand_side == HandSide.Backside)
+        if (suck == ManoGestureContinuous.CLOSED_HAND_GESTURE)
         {
             onSuckUp.Invoke();
+            originMaterial.material.color = Color.white;
+            destinationMaterial.material.color = Color.white;
             this.suck.text = "not sucking";
         }
     }
@@ -89,6 +98,8 @@ public class InputManager : MonoBehaviour
         if (trigger == ManoGestureContinuous.POINTER_GESTURE && trigger != ManoGestureContinuous.OPEN_PINCH_GESTURE)
         {
             onShoot.Invoke();
+            originMaterial.material.color = Color.red;
+            destinationMaterial.material.color = Color.red;
             //count++;
             this.shoot.text = "shooting";
         }
