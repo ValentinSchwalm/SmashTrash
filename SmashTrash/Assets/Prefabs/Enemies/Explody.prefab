@@ -285,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 1506048847205976582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.9, y: 0.25, z: -15.34}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1506048846298544167}
@@ -367,7 +367,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -387,14 +387,10 @@ MonoBehaviour:
   healthBarUI: {fileID: 1506048845481941296}
   damage: 25
   maxHealth: 10
-  DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
-    type: 3}
-  DroppedGold: {fileID: 4254455456937751087, guid: 32fecf9d18b9b744b907a85d46783f5d,
-    type: 3}
-  AmountOfTrashDropped: 2
-  movementSpeed: 3
+  enemyScore: 15
+  saveLoadHighScore: {fileID: 0}
+  movementSpeed: 1
   rangeToAttack: 1.5
-  targetToChase: {fileID: 0}
   ExplosionRange: 1.5
   playerMask:
     serializedVersion: 2

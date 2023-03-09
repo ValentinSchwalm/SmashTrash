@@ -6,7 +6,7 @@ public class ChasingEnemy : Enemy
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rangeToAttack;
-    [SerializeField] private Transform targetToChase;
+    private Transform targetToChase;
     private Rigidbody rigidbody;
 
     enum EnemyState
@@ -28,7 +28,7 @@ public class ChasingEnemy : Enemy
         {
             State = EnemyState.Attack;
         }
-        Vector3 moveDirection = (this.targetToChase.position - this.transform.position).normalized;
+        Vector3 moveDirection = (new Vector3 (this.targetToChase.position.x, this.transform.position.y, this.targetToChase.position.z) - this.transform.position).normalized;
         rigidbody.velocity = moveDirection * movementSpeed;
     }
 
@@ -43,6 +43,7 @@ public class ChasingEnemy : Enemy
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        targetToChase = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = maxHealth;
     }
@@ -62,7 +63,7 @@ public class ChasingEnemy : Enemy
                 break;
         }
 
-        this.transform.rotation = Quaternion.LookRotation(this.transform.position - targetToChase.transform.position);
+        this.transform.rotation = Quaternion.LookRotation(this.transform.position - new Vector3(targetToChase.position.x, this.transform.position.y, targetToChase.position.z));
     }
     protected virtual void OnDrawGizmos()
     {

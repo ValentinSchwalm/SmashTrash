@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 /// <summary>
@@ -83,6 +84,11 @@ public class SkeletonManager : MonoBehaviour
             Color tempColor = jointsMaterial[i].color;
             tempColor.a = 0f;
             jointsMaterial[i].color = tempColor;
+        }
+
+        foreach (var item in lineRenderers)
+        {
+            item.SetWidth(start: 0.01f, end: 0.01f);
         }
     }
 
