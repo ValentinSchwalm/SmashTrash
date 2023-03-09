@@ -15,23 +15,23 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private SkeletonManager skeletonManager;
     [SerializeField] private GameObject objectToInstantiate;
-    [SerializeField] private TextMeshProUGUI counter;
+    // [SerializeField] private TextMeshProUGUI counter;
 
-    [SerializeField] private TextMeshProUGUI suck, interact, shoot;
+    // [SerializeField] private TextMeshProUGUI suck, interact, shoot;
 
     private void Start()
     {
-        this.interact.text = "interact" + this.count;
-        this.suck.text = "not sucking";
+        // this.interact.text = "interact" + this.count;
+        // this.suck.text = "not sucking";
     }
 
 
     // Update is called once per frame
     void Update() 
     {
-        this.shoot.text = "not shooting";
+        // this.shoot.text = "not shooting";
         GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
-        counter.text = "not entering";
+        // counter.text = "not entering";
         ManomotionManager.Instance.SetManoMotionSmoothingValue(this.skeletonSmoothing);
 
         Interact(gesture);
@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour
             onInteract.Invoke();
             //Instantiate(this.objectToInstantiate, this.skeletonManager._listOfJoints[8].transform.position, Quaternion.identity);
             this.count++;
-            this.interact.text = "interact" + this.count;
+            // this.interact.text = "interact" + this.count;
         }
     }
 
@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
             onSuckDown.Invoke();
             //count++;
             //counter.text = count.ToString() + "suck";
-            this.suck.text = "sucking";
+            // this.suck.text = "sucking";
         }
     }
 
@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
         if (suck == ManoGestureTrigger.RELEASE_GESTURE && gesture.hand_side == HandSide.Backside)
         {
             onSuckUp.Invoke();
-            this.suck.text = "not sucking";
+            // this.suck.text = "not sucking";
         }
     }
 
@@ -84,13 +84,13 @@ public class InputManager : MonoBehaviour
     {
         ManoGestureContinuous trigger = gesture.mano_gesture_continuous;
 
-        this.counter.text = "entering: " + gesture.mano_gesture_continuous;
+        // this.counter.text = "entering: " + gesture.mano_gesture_continuous;
 
         if (trigger == ManoGestureContinuous.POINTER_GESTURE && trigger != ManoGestureContinuous.OPEN_PINCH_GESTURE)
         {
             onShoot.Invoke();
             //count++;
-            this.shoot.text = "shooting";
+            // this.shoot.text = "shooting";
         }
     }
 

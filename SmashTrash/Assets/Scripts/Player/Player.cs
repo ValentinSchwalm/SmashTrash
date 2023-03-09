@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour, IHealthSystem
 {
@@ -17,11 +18,22 @@ public class Player : MonoBehaviour, IHealthSystem
     [Header("UI")]
     [SerializeField] private Image healthbar;
     [SerializeField] private Image ammunitionbar;
+    [SerializeField] private TextMeshProUGUI goldAmount;
+
+    [Header("DebugUI")]
+    [SerializeField] private TextMeshProUGUI rangeUI;
+    [SerializeField] private TextMeshProUGUI ammoUI, healthUI, powerUI;
 
     private void Start()
     {
         this.maxHealthpoints = this.healthpoints;
         this.skeletonManager = FindObjectOfType<SkeletonManager>();
+        this.UpdateGold();
+
+        this.ammoUI.text = this.currentWeapon.MaxAmmunition.ToString();
+        this.healthUI.text = this.healthpoints.ToString();
+        this.powerUI.text = this.currentWeapon.Damage.ToString();
+        this.rangeUI.text = this.currentWeapon.ShootingForce.ToString();
     }
 
     private void Update()
@@ -136,6 +148,7 @@ public class Player : MonoBehaviour, IHealthSystem
     {
         this.maxHealthpoints += amount;
         this.healthpoints = this.maxHealthpoints;
+        this.healthUI.text = this.healthpoints.ToString();
     }
 
     /// <summary>
@@ -145,6 +158,7 @@ public class Player : MonoBehaviour, IHealthSystem
     public void IncreaseWeaponAmmunition(int amount)
     {
         this.currentWeapon.MaxAmmunition += amount;
+        this.ammoUI.text = this.currentWeapon.MaxAmmunition.ToString();
     }
 
     /// <summary>
@@ -154,6 +168,7 @@ public class Player : MonoBehaviour, IHealthSystem
     public void IncreaseWeaponDamage(int amount)
     {
         this.currentWeapon.Damage += amount;
+        this.powerUI.text = this.currentWeapon.Damage.ToString();
     }
 
     /// <summary>
@@ -163,5 +178,11 @@ public class Player : MonoBehaviour, IHealthSystem
     public void IncreaseWeaponRange(float amount)
     {
         this.currentWeapon.ShootingForce += amount;
+        this.rangeUI.text = this.currentWeapon.ShootingForce.ToString();
+    }
+
+    public void UpdateGold()
+    {
+        this.goldAmount.text = this.currency.ToString();
     }
 }
