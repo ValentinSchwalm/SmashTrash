@@ -18,7 +18,7 @@ public class ShopItem : MonoBehaviour, IInteractible
     /// <summary>
     /// Player buys item if they have enough currency.
     /// </summary>
-    public void OnInteract()
+    public void OnInteract(Vector3 pointOfImpact)
     {
         // Check if enough currency
         if (this.player?.Currency < this.prize)

@@ -26,21 +26,6 @@ public class Player : MonoBehaviour, IHealthSystem
 
     private void Update()
     {
-        //if (Input.GetKey(KeyCode.Mouse0))
-        //{
-        //    this.PrimaryFire();
-        //    this.Interact(this.interactionTransform.position);
-        //}
-
-        //if (Input.GetKey(KeyCode.Mouse1))
-        //{
-        //    this.SecondaryFire();
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.Mouse1))
-        //{
-        //    this.currentWeapon.OnSuckStop();
-        //}
         Vector3 pos1 = this.skeletonManager._listOfJoints[4].transform.position;
         Vector3 pos2 = this.skeletonManager._listOfJoints[8].transform.position;
 
@@ -91,7 +76,7 @@ public class Player : MonoBehaviour, IHealthSystem
         
         if (interactible == null) { return; }
 
-        interactible.OnInteract();
+        interactible.OnInteract(hit.point);
     }
 
     public void OnShoot()

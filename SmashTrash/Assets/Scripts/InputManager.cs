@@ -31,8 +31,6 @@ public class InputManager : MonoBehaviour
     {
         this.shoot.text = "not shooting";
         GestureInfo gesture = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info; // the current hand gesture being made
-        print("Gesture: " + gesture);
-        print("ManoManager: " + ManomotionManager.Instance.name);
         counter.text = "not entering";
         ManomotionManager.Instance.SetManoMotionSmoothingValue(this.skeletonSmoothing);
 
