@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spitter : Enemy
 {
-    [SerializeField] private Transform distanceToTarget;
+    private Transform distanceToTarget;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rangeToRunAway;
     [SerializeField] private float patrollingDistance;
@@ -86,6 +86,7 @@ public class Spitter : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        distanceToTarget = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -108,6 +109,10 @@ public class Spitter : Enemy
     }
     private void OnDrawGizmos()
     {
+        if (distanceToTarget == null)
+        {
+            return;
+        }
         Gizmos.DrawWireSphere(transform.position, rangeToRunAway);
         Vector3 patrollingZoneDistance = ((this.transform.position - this.distanceToTarget.position).normalized);
         Vector3 newPosition = this.distanceToTarget.position + patrollingZoneDistance * patrollingDistance;
