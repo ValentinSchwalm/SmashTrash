@@ -14,7 +14,15 @@ public class Enemy : MonoBehaviour, IHealthSystem
 
     public void Die()
     {
-        saveLoadHighScore.currentScore += enemyScore;
+        if (saveLoadHighScore != null)
+        {
+            saveLoadHighScore.currentScore += enemyScore;
+        }
+        else
+        {
+
+        }
+
         Destroy(gameObject);
     }
 

@@ -372,13 +372,9 @@ MonoBehaviour:
   healthBarUI: {fileID: 6753634040452313694}
   damage: 5
   maxHealth: 100
-  DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
-    type: 3}
-  DroppedGold: {fileID: 4254455456937751087, guid: 32fecf9d18b9b744b907a85d46783f5d,
-    type: 3}
-  AmountOfTrashDropped: 3
-  distanceToTarget: {fileID: 0}
-  movementSpeed: 1.25
+  enemyScore: 5
+  saveLoadHighScore: {fileID: 0}
+  movementSpeed: 1
   rangeToRunAway: 7
   patrollingDistance: 10
   rangeToAttack: 15
