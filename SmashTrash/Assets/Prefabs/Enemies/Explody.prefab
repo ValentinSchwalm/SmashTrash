@@ -389,6 +389,11 @@ MonoBehaviour:
   maxHealth: 10
   enemyScore: 15
   saveLoadHighScore: {fileID: 0}
+  DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
+    type: 3}
+  DroppedGold: {fileID: 4254455456937751087, guid: 32fecf9d18b9b744b907a85d46783f5d,
+    type: 3}
+  AmountOfTrashDropped: 5
   movementSpeed: 1
   rangeToAttack: 1.5
   ExplosionRange: 1.5
