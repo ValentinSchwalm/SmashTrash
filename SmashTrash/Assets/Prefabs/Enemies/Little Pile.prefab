@@ -117,6 +117,11 @@ MonoBehaviour:
   maxHealth: 1
   enemyScore: 1
   saveLoadHighScore: {fileID: 0}
+  DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
+    type: 3}
+  DroppedGold: {fileID: 4254455456937751087, guid: 32fecf9d18b9b744b907a85d46783f5d,
+    type: 3}
+  AmountOfTrashDropped: 5
   damageRange: 1.5
   playerMask:
     serializedVersion: 2

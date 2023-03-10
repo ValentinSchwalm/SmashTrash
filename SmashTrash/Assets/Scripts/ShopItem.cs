@@ -31,5 +31,6 @@ public class ShopItem : MonoBehaviour, IInteractible
         this.onInteract.Invoke();
         this.animator.SetTrigger("Success");
         this.player.Currency -= this.prize;
+        this.player.UpdateGold();
     }
 }
