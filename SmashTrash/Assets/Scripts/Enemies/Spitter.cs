@@ -94,7 +94,6 @@ public class Spitter : Enemy
     // Update is called once per frame
     void Update()
     {
-        this.ReceiveDamage(3);
         switch (State)
         {
             case EnemyState.Escaping:
