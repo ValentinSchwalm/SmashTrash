@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class LoadManager : MonoBehaviour
 {
-
     [SerializeField] private int scene;
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
         StartCoroutine(LoadNewScene());
     }
