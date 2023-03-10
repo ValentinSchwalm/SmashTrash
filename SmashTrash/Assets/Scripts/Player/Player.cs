@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IHealthSystem
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour, IHealthSystem
     [SerializeField] private int healthpoints;
     private int maxHealthpoints;
     public Transform interactionTransform;
+    private SaveLoadHighScore highScoreManager;
 
     private bool sucking;
     private SkeletonManager skeletonManager;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour, IHealthSystem
         this.maxHealthpoints = this.healthpoints;
         this.skeletonManager = FindObjectOfType<SkeletonManager>();
         this.UpdateGold();
+        this.highScoreManager = FindObjectOfType<SaveLoadHighScore>();
 
         this.ammoUI.text = this.currentWeapon.MaxAmmunition.ToString();
         this.healthUI.text = this.healthpoints.ToString();
@@ -138,6 +141,8 @@ public class Player : MonoBehaviour, IHealthSystem
     {
         print("Player died!");
         this.healthpoints = this.maxHealthpoints;
+        this.highScoreManager.SaveCurrentScore();
+        SceneManager.LoadScene(2);
     }
 
     /// <summary>

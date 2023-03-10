@@ -9,6 +9,11 @@ public class Weapon : MonoBehaviour
     [Header("Input")]
     [SerializeField] private Transform originPoint;
     [SerializeField] private Transform destinationPoint;
+    [SerializeField] private float smoothPoints;
+    [SerializeField] private Transform testO;
+    [SerializeField] private Transform testT;
+    private Vector3 currentOrigin;
+    private Vector3 currentDestination;
     private SkeletonManager skeletonManager;
 
     [Header("Shoot Stats")]
@@ -77,8 +82,11 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         // Set Inputs
-        this.originPoint.position = this.skeletonManager._listOfJoints[5].transform.position;
-        this.destinationPoint.position = this.skeletonManager._listOfJoints[8].transform.position;
+        Vector3 targetOriginPosition = this.skeletonManager._listOfJoints[5].transform.position;
+        Vector3 targetDestinationPosition = this.skeletonManager._listOfJoints[8].transform.position;
+        this.originPoint.position = Vector3.SmoothDamp(this.originPoint.position, targetOriginPosition, ref this.currentOrigin, this.smoothPoints);
+        this.destinationPoint.position = Vector3.SmoothDamp(this.destinationPoint.position, targetDestinationPosition, ref this.currentDestination, this.smoothPoints);
+        //this.testO.position = Vector3.SmoothDamp(this.testO.position, this.testT.position, ref this.currentDestination, this.smoothPoints);
 
         if (this.cooldown > 0)
         {
@@ -159,7 +167,7 @@ public class Weapon : MonoBehaviour
 
     private void DetectTrash()
     {
-        Vector3 suckDirection = (this.destinationPoint.position - this.originPoint.position).normalized;
+        Vector3 suckDirection = Camera.main.transform.forward;
         Vector3 suckpos = this.destinationPoint.position + suckDirection * this.suckSize.z / 2;
         this.suckTransform.position = suckpos;
         this.suckTransform.rotation = Quaternion.LookRotation(suckDirection, Vector3.forward);
