@@ -10,6 +10,11 @@ public class EnemySpawner : MonoBehaviour, IInteractible
 
     public void OnInteract(Vector3 pointOfImpact)
     {
-        Instantiate(this.enemies[this.enemyDropdown.value], pointOfImpact, Quaternion.identity);
+        if (this.enemyDropdown.value == 0)
+        {
+            return;
+        }
+
+        Instantiate(this.enemies[this.enemyDropdown.value - 1], pointOfImpact, Quaternion.identity);
     }
 }
