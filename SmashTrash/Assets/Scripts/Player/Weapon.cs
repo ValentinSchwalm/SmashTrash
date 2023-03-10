@@ -10,8 +10,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform originPoint;
     [SerializeField] private Transform destinationPoint;
     [SerializeField] private float smoothPoints;
-    [SerializeField] private Transform testO;
-    [SerializeField] private Transform testT;
     private Vector3 currentOrigin;
     private Vector3 currentDestination;
     private SkeletonManager skeletonManager;
@@ -86,7 +84,6 @@ public class Weapon : MonoBehaviour
         Vector3 targetDestinationPosition = this.skeletonManager._listOfJoints[8].transform.position;
         this.originPoint.position = Vector3.SmoothDamp(this.originPoint.position, targetOriginPosition, ref this.currentOrigin, this.smoothPoints);
         this.destinationPoint.position = Vector3.SmoothDamp(this.destinationPoint.position, targetDestinationPosition, ref this.currentDestination, this.smoothPoints);
-        //this.testO.position = Vector3.SmoothDamp(this.testO.position, this.testT.position, ref this.currentDestination, this.smoothPoints);
 
         if (this.cooldown > 0)
         {
