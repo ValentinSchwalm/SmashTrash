@@ -49,5 +49,8 @@ public class Enemy : MonoBehaviour, IHealthSystem
         }
     }
 
-    protected virtual void Start() { }
+    protected virtual void Start()
+    {
+        this.saveLoadHighScore = FindObjectOfType<SaveLoadHighScore>();
+    }
 }
