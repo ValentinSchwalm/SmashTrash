@@ -84,8 +84,9 @@ public class Spitter : Enemy
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         distanceToTarget = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
@@ -93,6 +94,7 @@ public class Spitter : Enemy
     // Update is called once per frame
     void Update()
     {
+        this.ReceiveDamage(3);
         switch (State)
         {
             case EnemyState.Escaping:

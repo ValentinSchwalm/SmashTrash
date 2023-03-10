@@ -15,6 +15,7 @@ public class Gold : MonoBehaviour, IInteractible
     public void OnInteract(Vector3 pointOfImpact)
     {
         this.player.Currency += this.goldAmount;
+        this.player.UpdateGold();
         Destroy(this.gameObject);
     }
 }

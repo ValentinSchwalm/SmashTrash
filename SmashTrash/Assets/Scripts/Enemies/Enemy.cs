@@ -20,11 +20,12 @@ public class Enemy : MonoBehaviour, IHealthSystem
     {
         if (saveLoadHighScore != null)
         {
+            print("YEEEEEEEEEEEEEEEEEEEES");
             saveLoadHighScore.currentScore += enemyScore;
         }
         else
         {
-
+            print("NOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         }
 
         Destroy(gameObject);

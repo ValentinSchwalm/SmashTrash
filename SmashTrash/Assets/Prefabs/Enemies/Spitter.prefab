@@ -372,7 +372,7 @@ MonoBehaviour:
   healthBarUI: {fileID: 6753634040452313694}
   damage: 5
   maxHealth: 100
-  enemyScore: 5
+  enemyScore: 2
   saveLoadHighScore: {fileID: 0}
   DroppedTrash: {fileID: 6110586277209933383, guid: 03554bc0ca45406469476a80ef92c2f4,
     type: 3}
